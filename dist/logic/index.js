@@ -1,8 +1,8 @@
-import {LogicGate} from "./gate.js";
+import {Lightbulb, LogicGate, Switch} from "./gate.js";
 export class LogicSimulation {
   constructor(data = {gates: []}) {
     this.gates = data.gates.map((gate) => {
-      return new LogicGate(this, gate.type, gate.connections, gate.id);
+      return gate.type === "switch" ? new Switch(this, gate.output, gate.connections, gate.id) : gate.type === "light" ? new Lightbulb(this, gate.connections, gate.id) : new LogicGate(this, gate.type, gate.connections, gate.id);
     });
   }
   getGate(id) {

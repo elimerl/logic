@@ -17,7 +17,7 @@ var Modes;
   Modes2[Modes2["SwitchMode"] = 2] = "SwitchMode";
 })(Modes || (Modes = {}));
 let mode = 0;
-const sim = new LogicSimulation();
+let sim = new LogicSimulation();
 const switches = [new Switch(sim, true), new Switch(sim, true)];
 const and = new LogicGate(sim, "and", {input: switches.map((v) => v.id)});
 document.getElementById("mode").onchange = () => {
@@ -41,8 +41,18 @@ sim.gates.push(and);
 const viz = new Viz({Module, render});
 reRender();
 const name = document.getElementById("name");
+if (localStorage.getItem("name"))
+  name.value = localStorage.getItem("name");
 document.getElementById("save").onclick = () => {
-  localStorage.setItem(name.value, JSON.stringify(sim.serialize()));
+  localStorage.setItem("sim" + name.value, JSON.stringify(sim.serialize()));
+};
+name.onchange = () => {
+  localStorage.setItem("name", name.value);
+};
+document.getElementById("load").onclick = () => {
+  sim = new LogicSimulation(JSON.parse(localStorage.getItem("sim" + name.value)));
+  console.log(sim);
+  reRender();
 };
 document.getElementById("fillGates").onchange = () => {
   opts.fillGates = document.getElementById("fillGates").checked;

@@ -72,4 +72,7 @@ export class Switch extends LogicGate {
   execute() {
     return this.output;
   }
+  serialize() {
+    return {...super.serialize(), output: this.output};
+  }
 }
