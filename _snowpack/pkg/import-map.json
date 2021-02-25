@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "nanoid": "./nanoid.js",
+    "viz.js": "./vizjs.js",
+    "viz.js/full.render.js": "./vizjs/full.render.js"
+  }
+}

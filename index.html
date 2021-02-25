@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Web site created using create-snowpack-app" />
+  <link rel="stylesheet" type="text/css" href="/index.css" />
+  <title>Logic Simulator</title>
+</head>
+
+<body>
+  <div>
+    <div class="toolbar">
+      <div class="toolbar-dropdown">Name &ensp;<input type="text" value="New Simulation" id="name"></div>
+      <div class="toolbar-dropdown"><button id="save">Save</button></div>
+      <div class="toolbar-dropdown"><button id="load">Load</button></div>
+      <div class="toolbar-dropdown">Fill Gates <input type="checkbox" id="fillGates"></div>
+      <div class="toolbar-dropdown"><select id="mode">
+          <option value="connect">Connect</option>
+          <option value="delete">Delete</option>
+          <option value="switch">Interact</option>
+        </select></div>
+
+    </div>
+    <div class="main">
+      <div class="creator">
+        Gate Type<br><select id="gatetype" class="margin-bottom">
+          <optgroup label="Normal">
+            <option value="or">OR</option>
+            <option value="and">AND</option>
+            <option value="xor">XOR</option>
+          </optgroup>
+          <optgroup label="Inverted">
+            <option value="nor">NOR</option>
+            <option value="nand">NAND</option>
+            <option value="xnor">XNOR</option>
+          </optgroup>
+          <optgroup label="Misc">
+            <option value="light">Lightbulb</option>
+            <option value="switch">Switch</option>
+          </optgroup>
+        </select><br>
+        <button id="new-gate">Create Gate</button>
+      </div>
+      <div id="graph"></div>
+    </div>
+  </div>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <script type="module" src="/dist/ui/index.js"></script>
+
+</body>
+
+</html>
