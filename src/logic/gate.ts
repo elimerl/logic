@@ -56,7 +56,7 @@ export class LogicGate {
         );
       case 'switch':
       case 'light':
-        break;
+        return false;
       default:
         throw new Error('Invalid type ' + this.type);
     }
