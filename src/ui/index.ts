@@ -21,9 +21,8 @@ enum Modes {
   DeleteMode,
   SwitchMode,
 }
-
 let mode = Modes.ConnectMode;
-const sim = new LogicSimulation();
+let sim = new LogicSimulation();
 const switches = [new Switch(sim, true), new Switch(sim, true)];
 const and = new LogicGate(sim, 'and', { input: switches.map((v) => v.id) });
 (document.getElementById('mode') as HTMLSelectElement).onchange = () => {
@@ -48,8 +47,20 @@ const viz = new Viz({ Module, render });
 reRender();
 
 const name = document.getElementById('name') as HTMLInputElement;
+if (localStorage.getItem('name'))
+  name.value = localStorage.getItem('name') as string;
 (document.getElementById('save') as HTMLButtonElement).onclick = () => {
-  localStorage.setItem(name.value, JSON.stringify(sim.serialize()));
+  localStorage.setItem('sim' + name.value, JSON.stringify(sim.serialize()));
+};
+name.onchange = () => {
+  localStorage.setItem('name', name.value);
+};
+(document.getElementById('load') as HTMLButtonElement).onclick = () => {
+  sim = new LogicSimulation(
+    JSON.parse(localStorage.getItem('sim' + name.value) as string),
+  );
+  console.log(sim);
+  reRender();
 };
 (document.getElementById('fillGates') as HTMLInputElement).onchange = () => {
   opts.fillGates = (document.getElementById(

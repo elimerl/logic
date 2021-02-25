@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import type { LogicSimulation } from '.';
 
 export interface LogicGateSerializable {
+  output?: boolean;
   id: string;
   connections: { input: string[] };
   type: 'or' | 'and' | 'xor' | 'nor' | 'nand' | 'xnor' | 'light' | 'switch';
@@ -103,5 +104,8 @@ export class Switch extends LogicGate {
   }
   execute() {
     return this.output;
+  }
+  serialize() {
+    return { ...super.serialize(), output: this.output };
   }
 }
